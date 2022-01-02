@@ -3,29 +3,67 @@ import java.io.*;
 import java.lang.System;
 import java.util.Scanner;
 
+/*
+ * Code created by Matthew Anacleto
+ * Completed Jan 2 2022
+ */
+
 public class PeakShapeCalculator {
 
 	public static void main(String[] args) {
-		// Start by creating CalculatorSystem object
+		
+		String enter = "x";
 		
 		CalculatorSystem cs = new CalculatorSystem();
 		cs.readFile("settings.txt");
 		Scanner in = new Scanner(System.in);
+	
 		
-		System.out.println("Please enter the Protein injection volume in uL: ");
-		cs.setInjectionParameter(0, in.nextDouble());
-		System.out.println("Please enter the Injection delay min: ");
-		cs.setInjectionParameter(2, in.nextDouble());
-		System.out.println("Please enter the Injection repeat gap min: ");
-		cs.setInjectionParameter(3, in.nextDouble());
-		System.out.println("Please enter the D2O injection volume in uL: ");
-		cs.setInjectionParameter(4, in.nextDouble());
-		System.out.println("Please enter the Number of peaks: ");
-		cs.setNumberOfPeaks(in.nextInt());
+		while(!(enter.equals("z"))) {
+			
+			if(enter.equals("x")) {
+				System.out.println("a. Please enter the Protein injection volume in uL: ");
+				cs.setInjectionParameter(0, in.nextDouble());
+				System.out.println("b. Please enter the Injection delay min: ");
+				cs.setInjectionParameter(2, in.nextDouble());
+				System.out.println("c. Please enter the Injection repeat gap min: ");
+				cs.setInjectionParameter(3, in.nextDouble());
+				System.out.println("d. Please enter the D2O injection volume in uL: ");
+				cs.setInjectionParameter(4, in.nextDouble());
+				System.out.println("e. Please enter the Number of peaks: ");
+				cs.setNumberOfPeaks(in.nextInt());
+			}
+			else if(enter.equals("a")) {
+				System.out.println("a. Please enter the Protein injection volume in uL: ");
+				cs.setInjectionParameter(0, in.nextDouble());
+			}
+			else if(enter.equals("b")) {
+				System.out.println("b. Please enter the Injection delay min: ");
+				cs.setInjectionParameter(2, in.nextDouble());
+			}
+			else if(enter.equals("c")) {
+				System.out.println("c. Please enter the Injection repeat gap min: ");
+				cs.setInjectionParameter(3, in.nextDouble());
+			}
+			else if(enter.equals("d")) {
+				System.out.println("d. Please enter the D2O injection volume in uL: ");
+				cs.setInjectionParameter(4, in.nextDouble());
+			}
+			else if(enter.equals("e")) {
+				System.out.println("e. Please enter the Number of peaks: ");
+				cs.setNumberOfPeaks(in.nextInt());
+			}
+			
+			cs.calculateInjectionParameters();
 		
-		cs.calculateInjectionParameters();
+			cs.createTable();
+			
+			System.out.println("\nIf you would like to change a specific value, enter the letter associated with it. If you would like to re-enter all values, enter 'x'. If you are done, enter 'z'.");
+			enter = in.next();
+		}
 		
-		cs.createTable();
+		
+		
 		in.close();
 	}
 
